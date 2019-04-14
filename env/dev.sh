@@ -1,0 +1,7 @@
+export PGUSER="admin"
+export PGPASSWORD="pikkukissa123"
+export PGDATABASE="postgres"
+export DATABASE_URL="postgres://admin:pikkukissa123@localhost:5432/postgres"
+export NODE_ENV="development"
+export PGHOST="localhost"
+export POOL_SIZE="30"

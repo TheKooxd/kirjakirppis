@@ -1,0 +1,12 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: pikkukissa123
+      POSTGRES_USER: admin
+    ports:
+      - 5432:5432
+    container_name: kirjakirppis_db

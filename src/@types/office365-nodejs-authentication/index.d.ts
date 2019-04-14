@@ -1,0 +1,1 @@
+declare module 'office365-nodejs-authentication';
