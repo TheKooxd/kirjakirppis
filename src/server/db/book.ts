@@ -1,5 +1,8 @@
-export const get = (name: string, client: any) =>
-  client.query(`SELECT * FROM users WHERE name = '${name}'`);
+export const getById = (id: string, client: any) =>
+  client.query(`SELECT * FROM books WHERE id = '${id}'`);
+
+export const getAll = (client: any) =>
+  client.query(`SELECT * FROM books`);
 
 export const set = (data: any, client: any) => 
   client.query(setBookQuery, [

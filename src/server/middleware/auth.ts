@@ -16,7 +16,8 @@ export const login = async (username: string, password: string, res: any, pool: 
       authWithMicrosoft(username, password)
       .then((response) => {
         req.session.loggedIn = true;
-        response ? res.sendStatus(200) : res.sendStatus(403);
+        req.session.user = databaseResponse.rows[0];
+        response ? res.status(200).send(databaseResponse.rows[0]) : res.sendStatus(403);
       })
       .catch((err) => res.sendStatus(500))
     } else {
@@ -24,12 +25,17 @@ export const login = async (username: string, password: string, res: any, pool: 
       .then((response) => {
         user.set({email: username, name: username.match(/^([^@]*)@/)[1]}, client)
         .then(() => {
-          req.session.loggedIn = true;
-          res.sendStatus(201)
+          user.get(username, client)
+          .then(dbResponse => {
+            req.session.loggedIn = true;
+            req.session.user = dbResponse.rows[0];
+            res.status(201).send(dbResponse.rows[0])
+          })
+          .catch(() => res.sendStatus(503));
         })
         .catch(() => res.sendStatus(503));
       })
-      .catch(err => res.sendStatus(201));
+      .catch(err => res.sendStatus(403));
     }
   } catch {
     res.sendStatus(500);

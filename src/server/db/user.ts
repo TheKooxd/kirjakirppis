@@ -1,7 +1,10 @@
-export const get = (username: string, client: any) =>
+export const get = async (username: string, client: any) =>
   client.query(`SELECT * FROM users WHERE email = '${username}'`);
 
-  export const set = (data: any, client: any) => 
+export const getById = async (id: string, client: any) =>
+  client.query(`SELECT * FROM users WHERE id = '${id}'`);
+
+export const set = (data: any, client: any) =>
   client.query(setUserQuery, [
     data.name,
     data.email,
